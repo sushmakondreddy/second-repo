@@ -1,0 +1,111 @@
+Q1. Write CPP program for binary search using template.
+
+#include<iostream>
+using namespace std;
+template<typename T>
+int binary_search(T arr[], int n, T x)
+{
+    int start = 0;
+    int end = n - 1;
+    while (start <= end)
+    {
+        int mid = (start + end) / 2;
+        if (arr[mid] == x)
+            return mid;
+        else if (arr[mid] < x)
+            start = mid + 1;
+        else
+            end = mid - 1;
+    }
+    return -1;
+}
+template<typename T>
+void PrintArray(T arr[], int n)
+{
+    for (int i = 0; i < n; ++i)
+        cout << arr[i] << " ";
+    cout << "\n\n";
+}
+
+int main()
+{
+int arr[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+int n = sizeof(arr) / sizeof(int);
+
+    cout << "Array : " << endl;
+    PrintArray(arr, n);
+
+    int x, index;
+    cout << "Enter value you want to Search: ";
+    cin >> x;
+
+    index = binary_search(arr, n, x);
+
+    if (index == -1)
+        cout << x << " is not present in the array" << endl;
+    else
+        cout << x << " is present in the array at position " << index << endl;
+
+}
+output:
+Array :
+1 2 3 4 5 6 7 8 9
+
+Enter value you want to Search: 4
+4 is present in the array at position 3
+
+
+
+
+
+
+Q2.Write a CPP program to overload ++ operator to increment date 
+
+#include<iostream>
+using namespace std;
+class Date
+{
+    int day;
+    int month;
+    int year;
+public:
+    Date(int d, int m, int y)
+    {
+        day = d;
+        month = m;
+        year = y;
+    }
+
+
+    friend Date operator +(Date&, int);
+    void display()
+    {
+        cout << "Date:" << day << "-" << month << "-" << year << endl;
+    }
+};
+
+Date operator+(Date& x, int y)
+{
+    return Date(x.day + y, x.month, x.year);
+}
+int main()
+{
+    int dd, mm, yy;
+    cout << "Enter Date:";
+    cin >> dd;
+    cout << "Enter Month:";
+    cin >> mm;
+    cout << "Enter Year:";
+    cin >> yy;
+
+    Date d1(dd, mm, yy);
+    Date d3 = d1 + 1;s
+    d3.display();
+    return 0;
+}
+
+output:
+Enter Date:27
+Enter Month:07
+Enter Year:1999
+Date:27-07-1999
